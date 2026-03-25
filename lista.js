@@ -22,6 +22,11 @@ function normalizarObjeto(obj) {
   return novo;
 }
 
+function textoSeguro(valor) {
+  if (valor === null || valor === undefined) return "";
+  return String(valor);
+}
+
 // ===== MAPEAR COLUNAS (INTELIGENTE) =====
 function mapearColunas(row) {
   const mapa = {};
@@ -74,17 +79,17 @@ async function gerarPDF() {
       // DEBUG
       console.log(`🧾 Linha ${i + index + 1}:`, row[mapa.nome]);
 
-      page.drawText(row[mapa.nome] || "", { x: 50, y: y, size: 10, font: fonte });
-      page.drawText(row[mapa.cpf] || "", { x: 300, y: y, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.nome]) || "", { x: 50, y: y, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.cpf]) || "", { x: 300, y: y, size: 10, font: fonte });
 
-      page.drawText(row[mapa.nascimento] || "", { x: 50, y: y - 15, size: 10, font: fonte });
-      page.drawText(row[mapa.cidade] || "", { x: 200, y: y - 15, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.nascimento]) || "", { x: 50, y: y - 15, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.cidade]) || "", { x: 200, y: y - 15, size: 10, font: fonte });
 
-      page.drawText(row[mapa.celular] || "", { x: 50, y: y - 30, size: 10, font: fonte });
-      page.drawText(row[mapa.email] || "", { x: 200, y: y - 30, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.celular]) || "", { x: 50, y: y - 30, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.email]) || "", { x: 200, y: y - 30, size: 10, font: fonte });
 
-      page.drawText(row[mapa.empresa] || "", { x: 50, y: y - 45, size: 10, font: fonte });
-      page.drawText(row[mapa.cnpj] || "", { x: 300, y: y - 45, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.empresa]) || "", { x: 50, y: y - 45, size: 10, font: fonte });
+      page.drawText(textoSeguro(row[mapa.cnpj]) || "", { x: 300, y: y - 45, size: 10, font: fonte });
 
       y -= 120;
     });
